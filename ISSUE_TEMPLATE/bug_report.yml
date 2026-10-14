@@ -1,0 +1,72 @@
+name: Bug report
+description: Something in BrewPHP does not work as documented.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug.
+        **Security problems must not be reported here**: see the security policy instead.
+  - type: input
+    id: brewphp-version
+    attributes:
+      label: BrewPHP version
+      description: Run `php manage.php about` or `php manage.php --version`.
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP version
+      placeholder: "8.3.12"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "Ubuntu 24.04, macOS 15, Windows 11..."
+    validations:
+      required: true
+  - type: dropdown
+    id: database
+    attributes:
+      label: Database
+      options:
+        - Not database related
+        - SQLite
+        - MySQL / MariaDB
+        - PostgreSQL
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The smallest code and commands that show the problem.
+      placeholder: |
+        1. Create a project with `composer create-project brewphp/skeleton myapp`
+        2. Add this route to config/urls.php: ...
+        3. Open http://127.0.0.1:8000/...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error output or logs
+      description: Stack traces, command output or log lines. Remove secrets first.
+      render: shell
