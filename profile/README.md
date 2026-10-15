@@ -1,22 +1,28 @@
-<!-- Logo placeholder: replace this heading with the BrewPHP logo once it exists. -->
-<h1 align="center">☕ BrewPHP</h1>
+<div align="center">
 
-<p align="center"><strong>A small, Django-inspired PHP framework: easy to learn, with a readable core and no runtime dependencies.</strong></p>
+# ☕ BrewPHP
 
-<p align="center">
-  <a href="https://github.com/brewphp/brewphp/blob/main/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-6F4E37.svg"></a>
-  <img alt="PHP >= 8.2" src="https://img.shields.io/badge/php-%3E%3D8.2-C8A27A.svg">
-  <a href="https://docs.brewphp.dev"><img alt="Documentation" src="https://img.shields.io/badge/docs-docs.brewphp.dev-6F4E37.svg"></a>
-  <!-- CI and coverage badges will be added once the GitHub Actions workflows exist. -->
-</p>
+**A small, Django-inspired PHP framework.**<br>
+Easy to learn, a core you can read in an afternoon, zero runtime dependencies.
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-6F4E37?style=flat-square)](https://github.com/brewphp/brewphp/blob/main/LICENSE)
+[![PHP 8.2+](https://img.shields.io/badge/php-8.2%2B-777BB4?style=flat-square&logo=php&logoColor=white)](https://www.php.net/)
+[![Docs](https://img.shields.io/badge/docs-docs.brewphp.dev-C8A27A?style=flat-square)](https://docs.brewphp.dev)
+
+[Documentation](https://docs.brewphp.dev) ·
+[Quick start](#-quick-start) ·
+[Roadmap](#-roadmap) ·
+[Contributing](https://github.com/brewphp/.github/blob/main/CONTRIBUTING.md)
+
+</div>
 
 ---
 
-BrewPHP brings Django's ideas to modern PHP: apps, URLconfs, views,
-templates, an ORM, migrations, an automatic admin and a `manage.php` for
-everything. The core is meant to be small enough to read in an afternoon.
+BrewPHP brings Django's ideas to modern PHP: **apps**, **URLconfs**,
+**views**, an **ORM**, **templates**, **migrations**, **auth and forms**, an
+**automatic admin** and a `manage.php` for everything.
 
-## Get started in 30 seconds
+## 🚀 Quick start
 
 ```bash
 composer create-project brewphp/skeleton myapp
@@ -24,81 +30,62 @@ cd myapp
 php manage.php serve
 ```
 
-Then open <http://127.0.0.1:8000/>.
+Then open http://127.0.0.1:8000/.
 
-## What the code looks like
-
-```php
-<?php
-// config/urls.php: the root URLconf
-
-declare(strict_types=1);
-
-use BrewPHP\Http\Request;
-
-return [
-    path('', fn (Request $request) => 'Hello, world!', name: 'home'),
-    path('blog/', include_urls('apps/blog/urls.php', namespace: 'blog')),
-];
-```
+## 👀 A taste
 
 ```php
-<?php
-// apps/blog/views.php
-
-declare(strict_types=1);
-
-namespace Apps\Blog;
-
-use BrewPHP\Http\Request;
-use BrewPHP\Http\Response;
-
-function detail(Request $request, int $id): Response
+// apps/blog/models.php
+final class Post extends Model
 {
-    return render('blog/detail.php', ['id' => $id]);
+    public static function fields(): array
+    {
+        return [
+            'title' => new CharField(maxLength: 200),
+            'body' => new TextField(),
+            'published' => new BooleanField(default: false),
+        ];
+    }
 }
-```
 
-```php
-<?php
+// apps/blog/views.php
+function index(Request $request): Response
+{
+    $posts = Post::objects()->filter(published: true)->orderBy('-id');
+
+    return render('blog/index.html', ['posts' => $posts]);
+}
+
 // apps/blog/urls.php
-
-declare(strict_types=1);
-
-use function Apps\Blog\detail;
-
 return [
-    path('posts/<int:id>/', detail(...), name: 'detail'),
+    path('', index(...), name: 'index'),
 ];
 ```
 
-`reverse('blog:detail', ['id' => 5])` gives `/blog/posts/5/`.
+## 📦 Repositories
 
-## Repositories
-
-| Repository | What it is |
+| Repository | Description |
 |---|---|
-| [brewphp/brewphp](https://github.com/brewphp/brewphp) | The framework core (Composer package `brewphp/brewphp`) |
-| [brewphp/skeleton](https://github.com/brewphp/skeleton) | The starter project used by `composer create-project` |
-| [brewphp/docs](https://github.com/brewphp/docs) | The documentation, published at [docs.brewphp.dev](https://docs.brewphp.dev) |
+| [**brewphp**](https://github.com/brewphp/brewphp) | The framework core, Composer package `brewphp/brewphp` |
+| [**skeleton**](https://github.com/brewphp/skeleton) | Starter project for `composer create-project brewphp/skeleton` |
+| [**docs**](https://github.com/brewphp/docs) | Documentation, published at [docs.brewphp.dev](https://docs.brewphp.dev) |
+| [**.github**](https://github.com/brewphp/.github) | This profile and the shared community files |
 
-A global installer is planned as the separate package `brewphp/installer`,
-providing `brewphp new myapp`. The skeleton remains the main way to start.
+## 🗺 Roadmap
 
-## Roadmap
+| Version | Scope | Status |
+|---|---|---|
+| 0.1 | Router, views, request/response, settings, CLI | ✅ Done |
+| 0.2 | ORM (SQLite, MySQL, PostgreSQL) | 🚧 In progress |
+| 0.3 | Templates | 🚧 In progress |
+| 0.4 | Migrations and `startapp` | 🚧 In progress |
+| 0.5 | Auth, sessions, CSRF, forms | 🚧 In progress |
+| 0.6 | Automatic admin | 🚧 In progress |
 
-| Version | Scope |
-|---|---|
-| v0.1 | Router, views, request/response, settings, CLI |
-| v0.2 | ORM (SQLite, MySQL, PostgreSQL) |
-| v0.3 | Templates |
-| v0.4 | Migrations and `startapp` |
-| v0.5 | Auth, sessions, CSRF, forms |
-| v0.6 | Automatic admin |
+## 🤝 Contributing
 
-## Contributing
-
-Contributions are welcome. Read the [contributing guide](https://github.com/brewphp/.github/blob/main/CONTRIBUTING.md)
+Contributions are welcome. Start with the
+[contributing guide](https://github.com/brewphp/.github/blob/main/CONTRIBUTING.md)
 and the [code of conduct](https://github.com/brewphp/.github/blob/main/CODE_OF_CONDUCT.md).
-Report security issues privately as described in the
+Please report security issues privately, as described in the
 [security policy](https://github.com/brewphp/.github/blob/main/SECURITY.md).
