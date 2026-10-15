@@ -79,8 +79,8 @@ return [
 | 0.2 | ORM (SQLite, MySQL, PostgreSQL) | ✅ Done |
 | 0.3 | Templates | ✅ Done |
 | 0.4 | Migrations and `startapp` | ✅ Done |
-| 0.5 | Auth, sessions, CSRF, forms | 🚧 In progress |
-| 0.6 | Automatic admin | 📅 Planned |
+| 0.5 | Auth, sessions, CSRF, forms | ✅ Done |
+| 0.6 | Automatic admin | ✅ Done |
 
 ## 🤝 Contributing
 
