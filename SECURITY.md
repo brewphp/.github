@@ -2,13 +2,13 @@
 
 ## Supported versions
 
-BrewPHP is in early development. Security fixes are made on the latest
-release line only.
+Security fixes are released for the latest minor version of the current
+major version.
 
 | Version | Supported |
 |---|---|
-| 0.1.x (in development) | Yes |
-| Older | No |
+| 1.x | Yes |
+| < 1.0 (development milestones) | No |
 
 ## Reporting a vulnerability
 

@@ -5,6 +5,8 @@
 **A small, Django-inspired PHP framework.**<br>
 Easy to learn, a core you can read in an afternoon, zero runtime dependencies.
 
+[![Latest version](https://img.shields.io/packagist/v/brewphp/brewphp?style=flat-square&color=6F4E37)](https://packagist.org/packages/brewphp/brewphp)
+[![CI](https://img.shields.io/github/actions/workflow/status/brewphp/brewphp/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/brewphp/brewphp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-6F4E37?style=flat-square)](https://github.com/brewphp/brewphp/blob/main/LICENSE)
 [![PHP 8.2+](https://img.shields.io/badge/php-8.2%2B-777BB4?style=flat-square&logo=php&logoColor=white)](https://www.php.net/)
 [![Docs](https://img.shields.io/badge/docs-docs.brewphp.dev-C8A27A?style=flat-square)](https://docs.brewphp.dev)
@@ -81,6 +83,7 @@ return [
 | 0.4 | Migrations and `startapp` | ✅ Done |
 | 0.5 | Auth, sessions, CSRF, forms | ✅ Done |
 | 0.6 | Automatic admin | ✅ Done |
+| **1.0** | **First stable release** | 🚀 **Released** |
 
 ## 🤝 Contributing
 
